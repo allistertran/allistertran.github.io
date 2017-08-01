@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <title>a b o u t</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Fullscreen Slit Slider with CSS3 and jQuery" />
+        <meta name="keywords" content="slit slider, plugin, css3, transitions, jquery, fullscreen, autoplay" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/custom.css" />
+        <link rel="stylesheet" type="text/css" href="home_style.css" />
+		<script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
+		<noscript>
+			<link rel="stylesheet" type="text/css" href="css/styleNoJS.css" />
+		</noscript>
+    </head>
+    <body>
+        
+        
+        
+        <div class="container demo-1">
+		
+
+            <div id="slider" class="sl-slider-wrapper">
+
+				<div class="sl-slider">
+				
+					<div class="sl-slide bg-1" data-orientation="horizontal">
+						<div class="sl-slide-inner">
+                            <div class="deco">
+                                <a href="home.html">
+                                <img src="images/dsdn383cover.png">
+                                </a>
+                            </div>
+							<h2>aesthetics</h2>
+							<blockquote>
+                                <p>
+                                    My design aesthetic is an eclectic mix of different references and styles all mixed to create a unique and fresh look. 
+                                </p>
+                                <cite>
+                                </cite>
+                            </blockquote>
+						</div>
+					</div>
+					
+					<div class="sl-slide bg-2" data-orientation="horizontal">
+						<div class="sl-slide-inner">
+                            <div class="deco">
+                                <img src="images/trends_cover.png">
+                            </div>
+							<h2>don't be afraid of trends</h2>
+							<blockquote>
+                                <p>
+                                    People always tell you to stay away from trends. I tend to embrace them and integrate them into my work. Just think, these things get really popular for a reason. Just don’t rely on them too much.
+                                </p>
+                                <cite>
+                                </cite>
+                            </blockquote>
+						</div>
+					</div>
+					
+					<div class="sl-slide bg-3" data-orientation="horizontal">
+						<div class="sl-slide-inner">
+                            <div class="deco">
+                                <img src="images/subvert_cover.png">
+                            </div>
+							<h2>always be subversive</h2>
+							<blockquote>
+                                <p>
+                                    As many have said, everything in design has been done already. Change it up, mix your aesthetics to create something fresh. In my work, I always like to play with duality and subversion of different references and styles. 
+
+                                </p>
+                                <cite>
+                                </cite>
+                            </blockquote>
+						</div>
+					</div>
+					
+					<div class="sl-slide bg-3" data-orientation="horizontal">
+						<div class="sl-slide-inner">
+                            <div class="deco">
+                                <img src="images/colour_cover.png">
+                            </div>
+							<h2>colours are important</h2>
+							<blockquote>
+                                <p>
+                                    Colouration is a huge part of my design aesthetic and I always spend extra time trying to get the right colours. Using the right colours in the right combinations can make an okay looking project into an amazing one. 
+
+                                </p>
+                                <cite>
+                                </cite>
+                            </blockquote>
+						</div>
+					</div>
+                    
+                    
+				</div><!-- /sl-slider -->
+				
+				<nav id="nav-arrows" class="nav-arrows">
+					<span class="nav-arrow-prev">Previous</span>
+					<span class="nav-arrow-next">Next</span>
+				</nav>
+
+				<nav id="nav-dots" class="nav-dots">
+					<span class="nav-dot-current"></span>
+					<span></span>
+					<span></span>
+                    					<span></span>
+
+				</nav>
+
+			</div><!-- /slider-wrapper -->
+
+        </div>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.ba-cond.min.js"></script>
+		<script type="text/javascript" src="js/jquery.slitslider.js"></script>
+		<script type="text/javascript">	
+			$(function() {
+			
+				var Page = (function() {
+
+					var $navArrows = $( '#nav-arrows' ),
+						$nav = $( '#nav-dots > span' ),
+						slitslider = $( '#slider' ).slitslider( {
+							onBeforeChange : function( slide, pos ) {
+
+								$nav.removeClass( 'nav-dot-current' );
+								$nav.eq( pos ).addClass( 'nav-dot-current' );
+
+							}
+						} ),
+
+						init = function() {
+
+							initEvents();
+							
+						},
+						initEvents = function() {
+
+							// add navigation events
+							$navArrows.children( ':last' ).on( 'click', function() {
+
+								slitslider.next();
+								return false;
+
+							} );
+
+							$navArrows.children( ':first' ).on( 'click', function() {
+								
+								slitslider.previous();
+								return false;
+
+							} );
+
+							$nav.each( function( i ) {
+							
+								$( this ).on( 'click', function( event ) {
+									
+									var $dot = $( this );
+									
+									if( !slitslider.isActive() ) {
+
+										$nav.removeClass( 'nav-dot-current' );
+										$dot.addClass( 'nav-dot-current' );
+									
+									}
+									
+									slitslider.jump( i + 1 );
+									return false;
+								
+								} );
+								
+							} );
+
+						};
+
+						return { init : init };
+
+				})();
+
+				Page.init();
+
+				/**
+				 * Notes: 
+				 * 
+				 * example how to add items:
+				 */
+
+				/*
+				
+				var $items  = $('<div class="sl-slide sl-slide-color-2" data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="10" data-slice1-scale="2" data-slice2-scale="1"><div class="sl-slide-inner bg-1"><div class="sl-deco" data-icon="t"></div><h2>some text</h2><blockquote><p>bla bla</p><cite>Margi Clarke</cite></blockquote></div></div>');
+				
+				// call the plugin's add method
+				ss.add($items);
+
+				*/
+			
+			});
+		</script>
+	</body>
+</html>

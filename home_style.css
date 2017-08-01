@@ -1,0 +1,15 @@
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.centered img {
+  left: 50%;
+  position: relative;
+  transform: translate(-50%, 0);
+  height: 100%;
+  width: 100%;
+}
